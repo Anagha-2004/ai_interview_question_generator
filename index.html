@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Interview Question Generator</title>
+  <style>
+    body {
+      background: #f2f2f2;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #4CAF50;
+    }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    button {
+      background: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .questions {
+      margin-top: 20px;
+    }
+    .question {
+      background: #e9f5e9;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Interview Question Generator</h1>
+    <label for="role">Select a Job Role:</label>
+    <select id="role">
+      <option value="">--Choose Role--</option>
+      <option value="data analyst">Data Analyst</option>
+      <option value="software developer">Software Developer</option>
+      <option value="ui ux designer">UI/UX Designer</option>
+    </select>
+    <button onclick="generateQuestions()">Generate Questions</button>
+    <div class="questions" id="questions"></div>
+  </div>
+
+  <script>
+    const QUESTIONS_DB = {
+      "data analyst": [
+        "How would you handle missing or inconsistent data in a dataset?",
+        "Explain the difference between supervised and unsupervised learning.",
+        "How do you decide which visualization to use for your data?",
+        "Describe a time you improved a business decision with data analysis.",
+        "What is your experience with SQL and querying large datasets?"
+      ],
+      "software developer": [
+        "Explain the principles of object-oriented programming.",
+        "How do you ensure code quality in large projects?",
+        "What is the difference between REST and SOAP APIs?",
+        "Describe a challenging bug you resolved and how.",
+        "How do you stay updated with new technologies?"
+      ],
+      "ui ux designer": [
+        "How do you conduct user research before starting a design?",
+        "Explain the importance of accessibility in design.",
+        "Describe a project where you improved user experience.",
+        "What tools do you prefer for prototyping and why?",
+        "How do you handle feedback from clients or stakeholders?"
+      ]
+    };
+
+    function generateQuestions() {
+      const role = document.getElementById('role').value;
+      const questionsDiv = document.getElementById('questions');
+      questionsDiv.innerHTML = '';
+
+      if (!role) {
+        questionsDiv.innerHTML = '<p style="color:red;">Please select a job role.</p>';
+        return;
+      }
+
+      const questions = QUESTIONS_DB[role];
+      questions.forEach(q => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        div.textContent = q;
+        questionsDiv.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
